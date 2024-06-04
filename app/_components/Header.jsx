@@ -5,7 +5,7 @@ import { Plus } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import React, { useEffect } from 'react'
+import React from 'react'
 
 function Header() {
     const path = usePathname();
@@ -29,7 +29,9 @@ function Header() {
                 </ul>
             </div>
             <div className='flex gap-2'>
-                <Button className='flex gap-2' ><Plus className='h-5 w-5' /> Postavi svoj oglas</Button>
+                <Link href={'/add-new-listing'}>
+                    <Button className='flex gap-2' ><Plus className='h-5 w-5' /> Postavi svoj oglas</Button>
+                </Link>
                 {isSignedIn ?
                     <UserButton /> :
                     <Link href={'/sign-in'}>

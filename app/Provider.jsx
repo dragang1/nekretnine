@@ -5,7 +5,10 @@ function Provider({ children }) {
     return (
         <div>
             <Header />
-            {children}</div>
+            <div className='mt-40'>
+                {children}
+            </div>
+        </div>
     )
 }
 
