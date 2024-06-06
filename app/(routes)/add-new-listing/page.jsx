@@ -7,12 +7,16 @@ import { useUser } from '@clerk/nextjs';
 import { Loader } from 'lucide-react';
 import React, { useState } from 'react'
 import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 function AddNewListing() {
     const [selectedAddress, setSelectedAddress] = useState();
     const [coordinates, setCoordinates] = useState();
     const { user } = useUser();
     const [loader, setLoader] = useState(false);
+
+
+    const router = useRouter();
 
 
     async function nextHandler() {
@@ -30,10 +34,13 @@ function AddNewListing() {
             ])
             .select()
 
+
+
         if (data) {
             setLoader(false);
             console.log('New Data Added', data)
             toast('Nova adresa dodana')
+            router.replace('/edit-listing/' + data[0].id)
 
         }
         if (error) {
