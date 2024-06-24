@@ -19,6 +19,7 @@ import { supabase } from '@/utils/supabase/client';
 import { toast } from 'sonner';
 import { useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
+import FileUpload from '../_components/FileUpload';
 
 
 
@@ -76,6 +77,8 @@ function EditListing({ params }) {
                 initialValues={{
                     type: '',
                     propertyType: '',
+                    profileImage: user?.imageUrl,
+                    userName: user?.userName
                 }}
                 onSubmit={(values) => {
                     console.log(values)
@@ -186,7 +189,12 @@ function EditListing({ params }) {
                                         defaultValue={listing?.description}
                                     />
                                 </div>
+                                <div >
+                                    <h2 className='font-lg text-gray-500 my-2'>Dodaj slike nekretnine</h2>
+                                    <FileUpload />
+                                </div>
                             </div>
+
                             <div className='flex gap-7 justify-end mt-10'>
                                 <Button variant="outline" className='text-primary border-primary'>Sacuvaj</Button>
                                 <Button>Sacuvaj i Objavi</Button>
