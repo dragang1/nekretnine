@@ -20,6 +20,7 @@ import { toast } from 'sonner';
 import { useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 import FileUpload from '../_components/FileUpload';
+import { Loader } from 'lucide-react';
 
 
 
@@ -28,6 +29,8 @@ import FileUpload from '../_components/FileUpload';
 
 function EditListing({ params }) {
     const [listing, setListing] = useState([]);
+    const [images, setImages] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     const { user } = useUser();
     const router = useRouter();
@@ -39,11 +42,12 @@ function EditListing({ params }) {
     async function verifyUser() {
         const { data, error } = await supabase
             .from('listing')
-            .select('*')
+            .select('*,listingImages(listing_id,url)')
             .eq('createdBy', user?.primaryEmailAddress.emailAddress)
             .eq('id', params.id)
 
         if (data) {
+            console.log(data)
 
             setListing(data[0])
         }
@@ -55,6 +59,7 @@ function EditListing({ params }) {
 
 
     async function onSubmitHandler(formValue) {
+        setLoading(true);
 
         const { data, error } = await supabase
             .from('listing')
@@ -65,6 +70,31 @@ function EditListing({ params }) {
         if (data) {
             console.log(data)
             toast('Oglas je sacuvan i objavljen')
+        }
+        for (const image of images) {
+            const file = image;
+            const fileName = Date.now().toString();
+            const fileExt = fileName.split('.').pop();
+            const { data, error } = await supabase.storage
+                .from('listingImages')
+                .upload(`${fileName}`, file, {
+                    contentType: `image/${fileExt}`,
+                    upsert: false
+                })
+
+            if (error) {
+                toast('Greska pri cuvanju slike!')
+            } else {
+
+                const imageUrl = process.env.NEXT_PUBLIC_IMAGE_URL + fileName;
+                const { data, error } = await supabase
+                    .from('listingImages')
+                    .insert([
+                        { url: imageUrl, listing_id: params?.id }
+                    ])
+                    .select();
+            }
+            setLoading(false);
         }
 
     }
@@ -191,13 +221,15 @@ function EditListing({ params }) {
                                 </div>
                                 <div >
                                     <h2 className='font-lg text-gray-500 my-2'>Dodaj slike nekretnine</h2>
-                                    <FileUpload />
+                                    <FileUpload setImages={(value) => setImages(value)} />
                                 </div>
                             </div>
 
                             <div className='flex gap-7 justify-end mt-10'>
                                 <Button variant="outline" className='text-primary border-primary'>Sacuvaj</Button>
-                                <Button>Sacuvaj i Objavi</Button>
+                                <Button disabled={loading}>
+                                    {loading ? <Loader className='animate-spin' /> : 'Sacuvaj i Objavi'}
+                                </Button>
                             </div>
 
                         </div>
