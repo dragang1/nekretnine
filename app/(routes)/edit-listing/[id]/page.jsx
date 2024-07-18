@@ -221,7 +221,11 @@ function EditListing({ params }) {
                                 </div>
                                 <div >
                                     <h2 className='font-lg text-gray-500 my-2'>Dodaj slike nekretnine</h2>
-                                    <FileUpload setImages={(value) => setImages(value)} />
+                                    <FileUpload
+                                        setImages={(value) => setImages(value)}
+                                        imageList={listing.listingImages}
+
+                                    />
                                 </div>
                             </div>
 

@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React, { useState } from 'react'
 
-function FileUpload({ setImages }) {
+function FileUpload({ setImages, imageList }) {
     const [imagePreview, setImagePreview] = useState([])
 
     function handleFileUpload(e) {
@@ -29,17 +29,17 @@ function FileUpload({ setImages }) {
                 </label>
 
             </div>
-            <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-7 xl:grid-cols-10 gap-3 mt-3'>
-                {imagePreview.map((image, index) => (
+            {imageList && <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-7 xl:grid-cols-10 gap-3 mt-3'>
+                {imageList.map((image, index) => (
                     <div key={index}>
 
-                        <Image src={image} width={100} height={100} alt='image' className='rounded-lg object-cover h-[100px] w-[100px]'
+                        <Image src={image?.url} width={100} height={100} alt='image' className='rounded-lg object-cover h-[100px] w-[100px]'
                         />
                     </div>
                 )
 
                 )}
-            </div>
+            </div>}
         </div>
 
     )
