@@ -21,6 +21,17 @@ import { useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 import FileUpload from '../_components/FileUpload';
 import { Loader } from 'lucide-react';
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
 
 
 
@@ -70,8 +81,10 @@ function EditListing({ params }) {
         if (data) {
             console.log(data)
             toast('Oglas je sacuvan i objavljen')
+            setLoading(false)
         }
         for (const image of images) {
+            setLoading(true)
             const file = image;
             const fileName = Date.now().toString();
             const fileExt = fileName.split('.').pop();
@@ -95,6 +108,21 @@ function EditListing({ params }) {
                     .select();
             }
             setLoading(false);
+        }
+
+    }
+
+    async function publishBtnHandler() {
+        setLoading(true)
+        
+const { data, error } = await supabase
+.from('listing')
+.update({ active: true })
+.eq('id', params?.id)
+.select()
+        if (data) {
+            setLoading(false)
+            toast('Oglas je uspjesno objavljen!')
         }
 
     }
@@ -230,12 +258,34 @@ function EditListing({ params }) {
                             </div>
 
                             <div className='flex gap-7 justify-end mt-10'>
-                                <Button variant="outline" className='text-primary border-primary'>Sacuvaj</Button>
-                                <Button disabled={loading}>
-                                    {loading ? <Loader className='animate-spin' /> : 'Sacuvaj i Objavi'}
-                                </Button>
-                            </div>
 
+                                <Button disabled={loading} variant="outline" className='text-primary border-primary'>
+                                    {loading ? <Loader className='animate-spin' /> : 'Sacuvaj'}
+                                </Button>
+
+
+                                <AlertDialog>
+                                    <AlertDialogTrigger>
+                                        <Button type='button' disabled={loading}>
+                                            {loading ? <Loader className='animate-spin' /> : 'Sacuvaj i Objavi'}
+                                        </Button>
+
+                                    </AlertDialogTrigger>
+                                    <AlertDialogContent>
+                                        <AlertDialogHeader>
+                                            <AlertDialogTitle>Oglas je spreman?</AlertDialogTitle>
+                                            <AlertDialogDescription>
+                                                Ako je oglas spreman,nastavi.U suprotnom otkazi i uredi oglas.
+                                            </AlertDialogDescription>
+                                        </AlertDialogHeader>
+                                        <AlertDialogFooter>
+                                            <AlertDialogCancel>Otkazi</AlertDialogCancel>
+                                            <AlertDialogAction onClick={() => publishBtnHandler()}>{loading ? <Loader className='animate-spin' /> : 'Nastavi'}</AlertDialogAction>
+                                        </AlertDialogFooter>
+                                    </AlertDialogContent>
+                                </AlertDialog>
+
+                            </div>
                         </div>
                     </form>)}
             </Formik>
