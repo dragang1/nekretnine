@@ -83,6 +83,10 @@ function EditListing({ params }) {
             toast('Oglas je sacuvan i objavljen')
             setLoading(false)
         }
+
+        if (error) {
+            console.log(error)
+        }
         for (const image of images) {
             setLoading(true)
             const file = image;
@@ -114,12 +118,12 @@ function EditListing({ params }) {
 
     async function publishBtnHandler() {
         setLoading(true)
-        
-const { data, error } = await supabase
-.from('listing')
-.update({ active: true })
-.eq('id', params?.id)
-.select()
+
+        const { data, error } = await supabase
+            .from('listing')
+            .update({ active: true })
+            .eq('id', params?.id)
+            .select()
         if (data) {
             setLoading(false)
             toast('Oglas je uspjesno objavljen!')
