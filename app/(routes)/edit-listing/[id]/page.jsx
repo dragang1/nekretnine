@@ -76,7 +76,7 @@ function EditListing({ params }) {
             .from('listing')
             .update(formValue)
             .eq('id', params.id)
-            .select()
+            .select();
 
         if (data) {
             console.log(data)
