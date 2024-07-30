@@ -34,7 +34,7 @@ function AddNewListing() {
             ])
             .select()
 
-
+        console.log(coordinates)
 
         if (data) {
             setLoader(false);

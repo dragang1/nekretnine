@@ -3,16 +3,21 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 import GoogleAddressSearch from './GoogleAddressSearch'
 import { Button } from '@/components/ui/button'
+import FilterSection from './FilterSection'
 
-function Listing({ listing, handleSearchClick, searchedAddress }) {
+function Listing({ listing, handleSearchClick, searchedAddress, setBedCount, setBathCount, setParkingCount, setHomeType, setCoordinates }) {
     const [address, setAddress] = useState();
     return (
         <div>
             <div className='p-3 flex gap-5'>
                 <GoogleAddressSearch selectedAddress={(v) => { searchedAddress(v); setAddress(v) }}
-                    setCoordinates={(v) => console.log(v)} />
+                    setCoordinates={setCoordinates} />
                 <Button className='flex gap-2' onClick={handleSearchClick} ><Search className='h-4 w-4' />Search</Button>
             </div>
+            <FilterSection setBedCount={setBedCount}
+                setBathCount={setBathCount}
+                setParkingCount={setParkingCount}
+                setHomeType={setHomeType} />
 
             {address && <div className='px-3 my-5'>
                 <h2 className='text-xl'>Pronadjeno <span className='font-bold'>{listing.length}</span> rezultata za <span className='text-primary font-bold'>{address.label}</span></h2>
