@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+import MarkerItem from './MarkerItem';
 
 const containerStyle = {
     width: '100%',
@@ -9,12 +10,13 @@ const containerStyle = {
 
 
 
-function GoogleMapsSection({ coordinates }) {
+function GoogleMapsSection({ coordinates, listing }) {
+
 
 
     const [center, setCenter] = useState({
         lat: -3.745,
-        lng: -38.523
+        lng: -38.523,
 
     })
 
@@ -27,12 +29,14 @@ function GoogleMapsSection({ coordinates }) {
     const [map, setMap] = React.useState(null)
 
     const onLoad = React.useCallback(function callback(map) {
-        if (window.google) {
-            const bounds = new window.google.maps.LatLngBounds(center);
+        if (window.google && listing.length > 0) {
+            const bounds = new window.google.maps.LatLngBounds();
+            listing.forEach(item => bounds.extend(item.coordinates));
             map.fitBounds(bounds);
-            setMap(map)
+            setMap(map);
         }
-    }, [])
+    }, [listing]);
+
 
     const onUnmount = React.useCallback(function callback(map) {
         setMap(null)
@@ -48,6 +52,7 @@ function GoogleMapsSection({ coordinates }) {
 
 
     return isLoaded ? (
+
         <GoogleMap
             mapContainerStyle={containerStyle}
             center={center}
@@ -55,9 +60,20 @@ function GoogleMapsSection({ coordinates }) {
             onLoad={onLoad}
             onUnmount={onUnmount}
         >
-            { /* Child components, such as markers, info windows, etc. */}
-            <></>
-        </GoogleMap>
+            {console.log(listing)}
+            {listing.map((item, index) => (
+
+                <MarkerItem
+                    key={index}
+                    item={item}
+
+                />
+
+            ))
+            }
+
+
+        </GoogleMap >
     ) : (
         <div>Loading...</div>
     )
