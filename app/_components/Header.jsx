@@ -15,11 +15,13 @@ function Header() {
     return (
         <div className='p-6 px-10 flex justify-between items-center shadow-sm fixed top-0 w-full z-10 bg-white'>
             <div className='flex gap-10 items-center'>
-                <div className='flex items-center gap-10'>
+                <Link href={'/'} >
+                    <div className='flex items-center gap-10'>
 
-                    <Image src={'/logo.svg'} width={100} height={100} alt='logo' />
-                    <h1 className='text-3xl text-[#fd7e14] '>Nekretnine</h1>
-                </div>
+                        <Image src={'/logo.svg'} width={100} height={100} alt='logo' />
+                        <h1 className='text-3xl text-[#fd7e14] '>Nekretnine</h1>
+                    </div>
+                </Link>
                 <ul className='hidden md:flex gap-10'>
                     <Link href={'/'}>
                         <li className={`hover:text-primary font-medium text-sm cursor-pointer ${path === '/' && 'text-primary'}`}>Prodaja</li>
