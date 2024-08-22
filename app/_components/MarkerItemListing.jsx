@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { Bath, BedDouble, MapPin, Ruler, X } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 function MarkerItemListing({ item, closeHandler }) {
@@ -24,8 +25,9 @@ function MarkerItemListing({ item, closeHandler }) {
 
             </div>
             <div className='flex justify-center p-3'>
-
-                <Button size='sm'>Pogledaj</Button>
+                <Link href={'/view-listing/' + item.id}>
+                    <Button size='sm'>Pogledaj</Button>
+                </Link>
             </div>
 
         </div>

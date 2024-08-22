@@ -59,6 +59,7 @@ function GoogleMapsSection({ coordinates, listing }) {
             zoom={10}
             onLoad={onLoad}
             onUnmount={onUnmount}
+            gestureHandling='greedy'
         >
             {console.log(listing)}
             {listing.map((item, index) => (

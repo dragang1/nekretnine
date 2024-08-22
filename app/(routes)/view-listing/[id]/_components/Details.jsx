@@ -1,6 +1,8 @@
+import GoogleMapsSection from '@/app/_components/GoogleMapsSection'
 import { Button } from '@/components/ui/button'
 import { Bath, Bed, BedDouble, Car, Drill, Home, LandPlot, MapPin, ParkingCircle, Share } from 'lucide-react'
 import React from 'react'
+import AgentDetail from './AgentDetail'
 
 function Details({ listingDetail }) {
     return listingDetail && (
@@ -26,6 +28,17 @@ function Details({ listingDetail }) {
             <div classname='mt-6'>
                 <h2 className='font-bold text-2xl'>Detaljnije</h2>
                 <p classname='text-gray-600'>{listingDetail?.description}</p>
+            </div>
+            <div>
+                <h2 className='font-bold text-2xl'>Pogledaj na mapi</h2>
+                <GoogleMapsSection
+                    coordinates={listingDetail?.coordinates}
+                    listing={[listingDetail]}
+                />
+            </div>
+            <div className='mt-4'>
+                <h2 className='font-bold text-2xl'>Kontaktiraj Agenta</h2>
+                <AgentDetail listingDetail={listingDetail} />
             </div>
         </div>
     )

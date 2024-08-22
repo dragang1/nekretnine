@@ -29,7 +29,7 @@ function Listing({ listing, handleSearchClick, searchedAddress, setBedCount, set
                     <Link href={'/view-listing/' + item.id}>
 
                         <div className='p-3 hover:border hover:border-primary cursor-pointer rounded-lg' key={item.id} >
-                            <Image src={item.listingImages[0].url}
+                            <Image src={item.listingImages[0]?.url}
                                 width={800}
                                 height={150}
                                 alt='propertyImage'

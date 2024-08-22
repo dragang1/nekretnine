@@ -1,11 +1,19 @@
 'use client';
 import { Button } from '@/components/ui/button'
-import { UserButton, useUser } from '@clerk/nextjs';
+import { SignOutButton, UserButton, useUser } from '@clerk/nextjs';
 import { Plus } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import React from 'react'
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+
 
 function Header() {
     const path = usePathname();
@@ -26,16 +34,33 @@ function Header() {
                     <Link href={'/'}>
                         <li className={`hover:text-primary font-medium text-sm cursor-pointer ${path === '/' && 'text-primary'}`}>Prodaja</li>
                     </Link>
-                    <li className='hover:text-primary font-medium text-sm cursor-pointer'>Iznajmljivanje</li>
+                    <Link href={'/rent'}>
+                        <li className={`hover:text-primary font-medium text-sm cursor-pointer ${path === '/rent' && "text-primary"}`} >Iznajmljivanje</li>
+                    </Link>
                     <li className='hover:text-primary font-medium text-sm cursor-pointer'>Agencije</li>
                 </ul>
             </div>
-            <div className='flex gap-2'>
+            <div className='flex gap-2 items-center '>
                 <Link href={'/add-new-listing'}>
                     <Button className='flex gap-2' ><Plus className='h-5 w-5' /> Postavi svoj oglas</Button>
                 </Link>
                 {isSignedIn ?
-                    <UserButton /> :
+                    <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                            <Image src={user?.imageUrl} width={35} height={35} alt='user profile' className='rounded-full cursor-pointer ' />
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                            <DropdownMenuLabel>Moj nalog</DropdownMenuLabel>
+                            <DropdownMenuSeparator />
+
+                            <DropdownMenuItem><Link href={'/user'}>Profil</Link></DropdownMenuItem>
+                            <DropdownMenuItem>Moji oglasi</DropdownMenuItem>
+                            <DropdownMenuItem><SignOutButton>Odjava</SignOutButton></DropdownMenuItem>
+
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+
+                    :
                     <Link href={'/sign-in'}>
 
                         <Button variant='outline' >Prijavi se</Button>
