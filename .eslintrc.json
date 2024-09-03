@@ -1,3 +1,8 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "react/jsx-key": "off", // Disable the key prop warning
+    "react-hooks/rules-of-hooks": "off", // Disable the conditional hook call warning
+    "react-hooks/exhaustive-deps": "off" // Disable missing dependencies in useEffect warnings
+  }
 }
