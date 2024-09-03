@@ -48,6 +48,7 @@ function EditListing({ params }) {
 
     useEffect(() => {
         user && verifyUser()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user])
 
     async function verifyUser() {

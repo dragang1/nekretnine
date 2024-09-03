@@ -27,6 +27,7 @@ function UserListing() {
 
     useEffect(() => {
         user && getUserListing()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user])
 
 

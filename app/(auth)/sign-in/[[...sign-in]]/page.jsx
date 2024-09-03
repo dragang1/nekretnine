@@ -1,4 +1,5 @@
 import { SignIn } from "@clerk/nextjs";
+import Image from "next/image";
 
 export default function Page() {
     return (
@@ -7,7 +8,7 @@ export default function Page() {
         <section class="bg-white container">
             <div class="lg:grid lg:min-h-screen lg:grid-cols-12">
                 <section class="relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
-                    <img
+                    <Image
                         alt=""
                         src="https://images.unsplash.com/photo-1567684014761-b65e2e59b9eb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8YXBhcnRtZW50c3xlbnwwfHwwfHx8MA%3D%3D"
                         class="absolute inset-0 h-full w-full object-cover opacity-80"

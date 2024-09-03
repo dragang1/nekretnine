@@ -16,6 +16,7 @@ function ListingMapView({ type }) {
 
     useEffect(() => {
         getLatestListing()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
 
     }, [])
 

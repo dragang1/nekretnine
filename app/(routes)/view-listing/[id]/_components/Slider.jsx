@@ -24,6 +24,7 @@ function Slider({ imageList }) {
                                     height={300}
                                     alt="Listing-Images"
                                     className="rounded-xl object-cover h-[300px] w-full "
+                                    key={item.id}
 
                                 />
                             </CarouselItem>
