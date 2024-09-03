@@ -23,7 +23,7 @@ function Slider({ imageList }) {
                                     width={800}
                                     height={300}
                                     alt="Listing-Images"
-                                    className="rounded-xl object-cover h-[300px] w-full "
+                                    className="rounded-xl object-cover h-[300px] w-full mt-[90px] "
                                     key={item.id}
 
                                 />

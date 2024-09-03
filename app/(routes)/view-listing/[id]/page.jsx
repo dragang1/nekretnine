@@ -35,7 +35,7 @@ function ViewListing({ params }) {
     }, [])
 
     return (
-        <div className='px-4 md:px-32 lg:px-56'>
+        <div className='px-6 md:px-32 lg:px-56 '>
             <Slider imageList={listingDetail?.listingImages} />
             <Details listingDetail={listingDetail} />
         </div>

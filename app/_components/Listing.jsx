@@ -9,8 +9,8 @@ import Link from 'next/link'
 function Listing({ listing, handleSearchClick, searchedAddress, setBedCount, setBathCount, setParkingCount, setHomeType, setCoordinates }) {
     const [address, setAddress] = useState();
     return (
-        <div>
-            <div className='p-3 flex gap-5'>
+        <div >
+            <div className='p-3 flex  gap-5 mt-[50px] '>
                 <GoogleAddressSearch selectedAddress={(v) => { searchedAddress(v); setAddress(v) }}
                     setCoordinates={setCoordinates} />
                 <Button className='flex gap-2' onClick={handleSearchClick} ><Search className='h-4 w-4' />Search</Button>
