@@ -159,7 +159,7 @@ function EditListing({ params }) {
                         <div className='p-8 rounded-lg shadow-md'>
                             <div className='grid grid-cols-1 md:grid-cols-3'>
 
-                                <div className='flex flex-col gap-2'>
+                                <div className='flex flex-col gap-2 mb-3'>
 
                                     <h2 className='text-lg text-slate-500'>Prodaja ili iznajmljivanje?</h2>
                                     <RadioGroup defaultValue={listing?.type} onValueChange={(v) => values.type = v}>
@@ -245,7 +245,7 @@ function EditListing({ params }) {
                                     />
                                 </div>
                             </div>
-                            <div className='grid grid-cols-1 gap-10'>
+                            <div className='grid grid-cols-1 md:gap-10 gap-3'>
                                 <div className='flex gap-2 flex-col'>
                                     <h2 className='text-gray-500'>Opis</h2>
                                     <Textarea placeholder='Dodaj opis...' name='description' onChange={handleChange}

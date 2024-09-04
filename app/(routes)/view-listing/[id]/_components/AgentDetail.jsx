@@ -4,7 +4,7 @@ import React from 'react'
 
 function AgentDetail({ listingDetail }) {
     return (
-        <div className='flex items-center justify-center gap-2 p-5 rounded-lg shadow-2xl border my-6 '>
+        <div className='flex items-center justify-center gap-2 md:p-5 rounded-lg shadow-2xl border my-6 '>
             <div className='flex gap-4 justify-center items-center'>
 
                 <Image

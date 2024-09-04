@@ -1,11 +1,24 @@
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/utils/supabase/client';
 import { useUser } from '@clerk/nextjs'
+
 import { Bath, BedDouble, MapPin, Ruler, Trash } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 import { toast } from 'sonner';
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+
 
 function UserListing() {
     const [listing, setListing] = useState();
@@ -24,6 +37,36 @@ function UserListing() {
             toast('Error')
         )
     }
+
+    const deleteUserListing = async (listing_id) => {
+
+        const { error: listingImagesError } = await supabase
+            .from('listingImages')
+            .delete()
+            .eq('listing_id', listing_id);
+
+        if (listingImagesError) {
+
+            toast.error('Greska pri brisanju');
+            return;
+        }
+
+
+        const { error: listingError } = await supabase
+            .from('listing')
+            .delete()
+            .eq('id', listing_id);
+
+        if (listingError) {
+            ;
+            toast.error('Greska pri brisanju');
+            return;
+        }
+
+        toast.success('Oglas obrisan!');
+        getUserListing();
+    };
+
 
     useEffect(() => {
         user && getUserListing()
@@ -65,12 +108,36 @@ function UserListing() {
                             <Link href={'/view-listing/' + item.id} className='w-full' >
                                 <Button size='sm' className='w-full'  >Pogledaj</Button>
                             </Link>
-                            <Button size='sm' variant='destructive' className='w-full'><Trash /></Button>
+
+
+                            <AlertDialog >
+                                <AlertDialogTrigger>
+                                    <Button size='sm' variant='destructive' className='w-full'><Trash /></Button>
+                                </AlertDialogTrigger>
+                                <AlertDialogContent>
+                                    <AlertDialogHeader>
+                                        <AlertDialogTitle>Jeste li sigurni?</AlertDialogTitle>
+                                        <AlertDialogDescription>
+                                            Oglas ce se trajno obrisati iz baze podataka.Ova akcija ne moze biti vracena.
+
+                                        </AlertDialogDescription>
+                                    </AlertDialogHeader>
+                                    <AlertDialogFooter>
+                                        <AlertDialogCancel>Otkazi</AlertDialogCancel>
+                                        <AlertDialogAction onClick={() => deleteUserListing(item.id)} >Nastavi</AlertDialogAction>
+                                    </AlertDialogFooter>
+                                </AlertDialogContent>
+                            </AlertDialog>
+
+
+
+
+
                         </div>
                     </div>
                 ))}
             </div>
-        </div>
+        </div >
     )
 }
 

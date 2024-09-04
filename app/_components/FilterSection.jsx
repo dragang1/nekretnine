@@ -11,9 +11,9 @@ import { Bath, BedDouble, CarFront, } from 'lucide-react'
 
 function FilterSection({ setBedCount, setBathCount, setParkingCount, setHomeType }) {
     return (
-        <div className='px-3 py-2 grid grid-cols-2 md:grid-cols-4'>
-            <Select onValueChange={setBedCount} >
-                <SelectTrigger className="w-[180px]">
+        <div className='px-3 py-2 grid grid-cols-2   md:grid-cols-4'>
+            <Select onValueChange={setBedCount}  >
+                <SelectTrigger className="w-[100px] md:w-[180px] ">
                     <SelectValue placeholder="Krevet" />
                 </SelectTrigger>
                 <SelectContent>
@@ -33,7 +33,7 @@ function FilterSection({ setBedCount, setBathCount, setParkingCount, setHomeType
                 </SelectContent>
             </Select>
             <Select onValueChange={setBathCount}>
-                <SelectTrigger className="w-[180px]">
+                <SelectTrigger className="w-[100px] md:w-[180px] ">
                     <SelectValue placeholder="Kupatilo" />
                 </SelectTrigger>
                 <SelectContent>
@@ -53,7 +53,7 @@ function FilterSection({ setBedCount, setBathCount, setParkingCount, setHomeType
                 </SelectContent>
             </Select>
             <Select onValueChange={setParkingCount}>
-                <SelectTrigger className="w-[180px]">
+                <SelectTrigger className="w-[100px] md:w-[180px] ">
                     <SelectValue placeholder="Parking" />
                 </SelectTrigger>
                 <SelectContent>
@@ -73,7 +73,7 @@ function FilterSection({ setBedCount, setBathCount, setParkingCount, setHomeType
                 </SelectContent>
             </Select>
             <Select onValueChange={(value) => value === 'Svi' ? setHomeType(null) : setHomeType(value)}>
-                <SelectTrigger className="w-[180px]">
+                <SelectTrigger className="w-[100px] md:w-[180px] ">
                     <SelectValue placeholder="Tip objekta" />
                 </SelectTrigger>
                 <SelectContent>
