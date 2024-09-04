@@ -21,8 +21,8 @@ function Header() {
 
 
     return (
-        <div className='p-6 px-10 flex flex-col md:flex-row md:justify-between items-center shadow-sm fixed top-0 w-full z-10 bg-white'>
-            <div className='flex flex-col  gap-10 items-center'>
+        <div className='p-2 flex flex-col md:flex-row md:justify-between items-center shadow-sm fixed top-0 w-full z-10'>
+            <div className='flex flex-col  gap-10 '>
                 <Link href={'/'} >
                     <div className='flex items-center gap-10'>
 

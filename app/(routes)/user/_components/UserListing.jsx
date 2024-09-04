@@ -80,7 +80,7 @@ function UserListing() {
             <div className='gap-4 flex flex-col '>
 
                 {listing && listing.map((item, index) => (
-                    <div className='p-3 hover:border hover:border-primary cursor-pointer rounded-lg' key={item.id} >
+                    <div className='p-2 hover:border hover:border-primary cursor-pointer rounded-lg' key={item.id} >
                         <h2 className='bg-primary text-white absolute px-2 text-sm p-1 m-1 rounded-lg'>{item.active ? 'Objavljen' : 'Sacuvan'}</h2>
                         <Image src={item?.listingImages[0] ? item?.listingImages[0]?.url : '/placeholder.jpg'}
                             width={800}

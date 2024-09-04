@@ -77,4 +77,12 @@
 
 .cl-internal-1c61r6f {
 	width: 100%;
+	padding: 24px;
+}
+
+@media (max-width: 600px) {
+	.cl-internal-1c61r6f {
+		padding: 16px;
+		margin: 0 auto;
+	}
 }

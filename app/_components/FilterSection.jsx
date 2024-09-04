@@ -11,7 +11,7 @@ import { Bath, BedDouble, CarFront, } from 'lucide-react'
 
 function FilterSection({ setBedCount, setBathCount, setParkingCount, setHomeType }) {
     return (
-        <div className='px-3 py-2 grid grid-cols-2   md:grid-cols-4'>
+        <div className='px-3 py-2 grid grid-cols-2'>
             <Select onValueChange={setBedCount}  >
                 <SelectTrigger className="w-[100px] md:w-[180px] ">
                     <SelectValue placeholder="Krevet" />
