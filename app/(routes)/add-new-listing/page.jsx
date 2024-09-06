@@ -51,9 +51,9 @@ function AddNewListing() {
     }
     return (
 
-        <div className='mt-10 md:mx-56 lg:mx-80'>
+        <div className='  md:mx-56 lg:mx-80'>
 
-            <div className='p-10 flex flex-col gap-5 items-center justify-center'>
+            <div className='p-10  flex flex-col gap-5 items-center justify-center'>
                 <h2 className='font-bold text-2xl'>Dodaj novi oglas</h2>
                 <div className='p-10 rounded-lg shadow-md border flex flex-col  gap-5 w-full'>
                     <h2 className='text-gray-500'>Unesi adresu tvoje nekretnine</h2>
