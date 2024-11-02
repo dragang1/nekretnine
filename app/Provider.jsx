@@ -12,7 +12,7 @@ function Provider({ children }) {
             >
 
                 <Header />
-                <div className='md:mt-60  '>
+                <div >
                     {children}
                 </div>
             </LoadScript>

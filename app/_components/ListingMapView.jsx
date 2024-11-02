@@ -64,7 +64,7 @@ function ListingMapView({ type }) {
         }
     }
     return (
-        <div className='flex flex-col md:grid  md:grid-cols-2 gap-10 container '>
+        <div className='flex flex-col md:grid  md:grid-cols-2 gap-10 mx-10 '>
 
             <div> <Listing
                 listing={listing}
@@ -76,7 +76,7 @@ function ListingMapView({ type }) {
                 setHomeType={setHomeType}
                 setCoordinates={setCoordinates}
             /></div>
-            <div className='md:fixed right-10 h-full  md:w-[350px] lg:w-[450px] xl:w-[650px]'>
+            <div className='  h-full  md:w-[350px] lg:w-[450px] xl:w-[650px]'>
 
                 <GoogleMapsSection
                     listing={listing}
